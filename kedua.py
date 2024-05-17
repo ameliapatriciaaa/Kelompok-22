@@ -159,10 +159,6 @@ class AdminPanel:
                 self.sel.append(i)
 
     def tambahproduk(self):
-        tambahproduk_window = Toplevel(self.root)
-        tambahproduk_window.geometry("1366x768")
-        tambahproduk_window.title("Add Product")
-        tambahproduk(self, tambahproduk_window)
 
     def updateproduk(self):
         pass
