@@ -54,7 +54,7 @@ class AdminPanel:
         label_image = Label(inv_window)
         label_image.place(relx=0, rely=0, width=1200, height=600)
 
-        image_path = r"C:\Users\asus\Downloads\Grocery\images\Inventori.png"
+        image_path = r".\Images\Inventori.png"
         img = PhotoImage(file=image_path)
         label_image.config(image=img)
         label_image.image = img
@@ -162,8 +162,120 @@ class AdminPanel:
                 self.sel.append(i)
 
     def tambahproduk(self):
-        pass
+        inv_window = Toplevel(self.root)
+        inv_window.geometry("1200x600")
+        inv_window.title("Inventory")
+        inv_window.resizable(0, 0)
 
+        label_image = Label(inv_window)
+        label_image.place(relx=0, rely=0, width=1200, height=600)
+
+        image_path = r".\images\tambahproduk.png"
+        img = PhotoImage(file=image_path)
+        label_image.config(image=img)
+        label_image.image = img
+
+        self.entrynama = Entry(inv_window)
+        self.entrynama.place(relx=0.107, rely=0.305, width=240, height=25)
+        self.entrynama.configure(font="-family {arial} -size 12")
+        self.entrynama.configure(relief="flat")
+
+        self.entrykategori = Entry(inv_window)
+        self.entrykategori.place(relx=0.107, rely=0.446, width=240, height=25)
+        self.entrykategori.configure(font="-family {arial} -size 12")
+        self.entrykategori.configure(relief="flat")
+
+        self.entrykuantitas = Entry(inv_window)
+        self.entrykuantitas.place(relx=0.107, rely=0.587, width=240, height=25)
+        self.entrykuantitas.configure(font="-family {arial} -size 12")
+        self.entrykuantitas.configure(relief="flat")
+
+        self.entryhargajual = Entry(inv_window)
+        self.entryhargajual.place(relx=0.107, rely=0.727, width=240, height=25)
+        self.entryhargajual.configure(font="-family {arial} -size 12")
+        self.entryhargajual.configure(relief="flat")
+
+        self.entryidproduk = Entry(inv_window)
+        self.entryidproduk.place(relx=0.532, rely=0.305, width=240, height=25)
+        self.entryidproduk.configure(font="-family {arial} -size 12")
+        self.entryidproduk.configure(relief="flat")
+
+        self.entrysubkategori = Entry(inv_window)
+        self.entrysubkategori.place(relx=0.532, rely=0.446, width=240, height=25)
+        self.entrysubkategori.configure(font="-family {arial} -size 12")
+        self.entrysubkategori.configure(relief="flat")
+
+        self.entryhargapokok = Entry(inv_window)
+        self.entryhargapokok.place(relx=0.532, rely=0.587, width=240, height=25)
+        self.entryhargapokok.configure(font="-family {arial} -size 12")
+        self.entryhargapokok.configure(relief="flat")
+
+        self.entrynotelp = Entry(inv_window)
+        self.entrynotelp.place(relx=0.532, rely=0.727, width=240, height=25)
+        self.entrynotelp.configure(font="-family {arial} -size 12")
+        self.entrynotelp.configure(relief="flat")
+
+        button_update = Button(inv_window, text="Add", command=lambda: self.add(inv_window), bg="#82736F", fg="white", font=("Arial", 12, "bold"))
+        button_update.place(relx=0.395, rely=0.898, width=119, height=47)
+
+        button_clear = Button(inv_window, text="Clear", command=self.clear, bg="#82736F", fg="white", font=("Arial", 12, "bold"))
+        button_clear.place(relx=0.518, rely=0.898, width=119, height=47)
+    
+
+    def add(self,p_tambah):
+        pknt = self.entrykuantitas.get()
+        pktg = self.entrykategori.get()  
+        phjl = self.entryhargajual.get()  
+        pnama = self.entrynama.get()  
+        psubkat = self.entrysubkategori.get()  
+        phpp = self.entryhargapokok.get()  
+        pvendor = self.entrynotelp.get() 
+        pid =self.entryidproduk.get() 
+
+        def valid_phone(phone_number):
+            return phone_number.isdigit() and len(phone_number) == 10
+        
+        if pnama.strip():
+            if pktg.strip():
+                if psubkat.strip():
+                    if pknt:
+                        if phpp:
+                            try:
+                                float(phpp)
+                            except ValueError:
+                                messagebox.showerror("Oops!", "Invalid cost price.", parent=p_tambah)
+                            else:
+                                if phjl:
+                                    try:
+                                        float(phjl)
+                                    except ValueError:
+                                        messagebox.showerror("Oops!", "Invalid MRP.", parent=p_tambah)
+                                    else:
+                                        if valid_phone(pvendor):
+                                            new_product = [pid,pnama, pktg, psubkat, int(pknt), float(phjl), float(phpp), pvendor]
+                                            with open('inventory_data.csv', 'a', newline='') as file:
+                                                writer = csv.writer(file)
+                                                writer.writerow(new_product)
+                                            messagebox.showinfo("Success!!", "Product successfully added in inventory.", parent=p_tambah)
+                                            p_tambah.destroy()
+                                            self.tree.delete(*self.tree.get_children())
+                                            self.display_data()
+                                        else:
+                                            messagebox.showerror("Oops!", "Invalid phone number.", parent=p_tambah)
+                                else:
+                                    messagebox.showerror("Oops!", "Please enter MRP.", parent=p_tambah)
+                        else:
+                            messagebox.showerror("Oops!", "Please enter product cost price.", parent=p_tambah)
+                    else:
+                        messagebox.showerror("Oops!", "Please enter product quantity.", parent=p_tambah)
+                else:
+                    messagebox.showerror("Oops!", "Please enter product sub-category.", parent=p_tambah)
+            else:
+                messagebox.showerror("Oops!", "Please enter product category.", parent=p_tambah)
+        else:
+            messagebox.showerror("Oops!", "Please enter product name", parent=p_tambah)
+
+        
     def open_updateproduk(self):
         inv_window = Toplevel(self.root)
         inv_window.geometry("1200x600")
@@ -173,7 +285,7 @@ class AdminPanel:
         label_image = Label(inv_window)
         label_image.place(relx=0, rely=0, width=1200, height=600)
 
-        image_path = r"C:\Users\asus\Downloads\Grocery\images\updateproduk.png"
+        image_path = r".\images\updateproduk.png"
         img = PhotoImage(file=image_path)
         label_image.config(image=img)
         label_image.image = img
@@ -250,7 +362,7 @@ class AdminPanel:
                                         if valid_phone(pvendor):
                                             updated = False
                                             data = []
-                                            csv_file = r"C:\Users\asus\Downloads\Grocery\inventory_data.csv"
+                                            csv_file = r"inventory_data.csv"
                                             
                                             # Membaca data saat ini
                                             if os.path.exists(csv_file):
