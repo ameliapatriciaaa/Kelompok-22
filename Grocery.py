@@ -453,6 +453,89 @@ class AdminPanel:
             inv.destroy()
 
     def billingsystem(self):
+        inv_window = Toplevel(self.root)
+        inv_window.geometry("1200x600")
+        inv_window.title("Billing System")
+        inv_window.resizable(0, 0)
+
+        label_image = Label(inv_window)
+        label_image.place(relx=0, rely=0, width=1200, height=600)
+
+        image_path = r".\Images\billingsystem.png"
+        img = PhotoImage(file=image_path)
+        label_image.config(image=img)
+        label_image.image = img
+
+        self.entrynamacust = Entry(inv_window)
+        self.entrynamacust.place(relx=0.515, rely=0.155, width=200, height=25)
+        self.entrynamacust.configure(font="-family {arial} -size 12")
+        self.entrynamacust.configure(relief="flat")
+
+        self.entrynocust = Entry(inv_window)
+        self.entrynocust.place(relx=0.775, rely=0.155, width=200, height=25)
+        self.entrynocust.configure(font="-family {arial} -size 12")
+        self.entrynocust.configure(relief="flat")
+
+        self.entrycustcarinota = Entry(inv_window)
+        self.entrycustcarinota.place(relx=0.110, rely=0.155, width=200, height=25)
+        self.entrycustcarinota.configure(font="-family {arial} -size 12")
+        self.entrycustcarinota.configure(relief="flat")
+
+        button_caritagihan = Button(inv_window, text="Cari", command=self.cari_tagihan, bg="#82736F", fg="white", font=("Arial", 12, "bold"))
+        button_caritagihan.place(relx=0.302, rely=0.145, width=93, height=35)
+
+        button_total = Button(inv_window, text="Total", command=self.total, bg="#82736F", fg="white", font=("Arial", 11, "bold"))
+        button_total.place(relx=0.041, rely=0.881, width=101, height=27)
+
+        button_buat = Button(inv_window, text="Buat", command=self.buat, bg="#82736F", fg="white", font=("Arial", 11, "bold"))
+        button_buat.place(relx=0.041, rely=0.933, width=101, height=27)
+
+        button_print = Button(inv_window, text="Print", command=self.print, bg="#82736F", fg="white", font=("Arial", 11, "bold"))
+        button_print.place(relx=0.169, rely=0.881, width=103, height=27)
+
+        button_email = Button(inv_window, text="Email", command=self.print, bg="#82736F", fg="white", font=("Arial", 11, "bold"))
+        button_email.place(relx=0.169, rely=0.933, width=103, height=27)
+
+        button_clearbill = Button(inv_window, text="Clear", command=self.clear_bill, bg="#82736F", fg="white", font=("Arial", 11, "bold"))
+        button_clearbill.place(relx=0.304, rely=0.881, width=103, height=27)
+
+        button_keluarbill = Button(inv_window, text="Keluar", command=self.keluar_bill, bg="#82736F", fg="white", font=("Arial", 11, "bold"))
+        button_keluarbill.place(relx=0.304, rely=0.933, width=103, height=27)
+
+        button_tambahkan = Button(inv_window, text="Tambahkan", command=self.tambahkan, bg="#82736F", fg="white", font=("Arial", 12, "bold"))
+        button_tambahkan.place(relx=0.088, rely=0.720, width=94, height=35)
+
+        button_hapus = Button(inv_window, text="Hapus", command=self.hapus, bg="#82736F", fg="white", font=("Arial", 12, "bold"))
+        button_hapus.place(relx=0.177, rely=0.720, width=94, height=35)
+
+        button_clearpilihan = Button(inv_window, text="Clear", command=self.clear_pilihan, bg="#82736F", fg="white", font=("Arial", 12, "bold"))
+        button_clearpilihan.place(relx=0.266, rely=0.720, width=94, height=35)
+    
+    def cari_tagihan(self):
+        pass
+
+    def total(self):
+        pass
+
+    def buat(self):
+        pass
+
+    def print(self):
+        pass
+
+    def clear_bill(self):
+        pass
+
+    def keluar_bill(self):
+        pass
+
+    def tambahkan(self):
+        pass
+
+    def hapus(self):
+        pass
+
+    def clear_pilihan(self):
         pass
 
     def invoices(self):
