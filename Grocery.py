@@ -629,7 +629,18 @@ class AdminPanel:
         pass
 
     def invoices(self):
-        pass
+        invo_window = Toplevel(self.root)
+        invo_window.geometry("1200x600")
+        invo_window.title("Invoce")
+        invo_window.resizable(0, 0)
+
+        label_image = Label(invo_window)
+        label_image.place(relx=0, rely=0, width=1200, height=600)
+
+        image_path = r".\Images\Invoice.png"
+        img = PhotoImage(file=image_path)
+        label_image.config(image=img)
+        label_image.image = img
 
 
 if __name__ == "__main__":
