@@ -642,6 +642,108 @@ class AdminPanel:
         label_image.config(image=img)
         label_image.image = img
 
+        self.kodeinvo = Entry(invo_window)
+        self.kodeinvo.place(relx=0.112, rely=0.286, width=163, height=25)
+        self.kodeinvo.configure(font="-family {arial} -size 12")
+        self.kodeinvo.configure(relief="flat")
+
+        button_kodeinvo = Button(invo_window)
+        button_kodeinvo.place(relx=0.132, rely=0.286,width=76,height=23)
+        button_kodeinvo.configure(relief="flat")
+        button_kodeinvo.configure(overrelief="flat")
+        button_kodeinvo.configure(activebackground="#82736F")
+        button_kodeinvo.configure(cursor="hand2")
+        button_kodeinvo.configure(foreground="#ffffff")
+        button_kodeinvo.configure(font="Arial")
+        button_kodeinvo.configure(borderwidth="0")
+        button_kodeinvo.configure(text="Search")
+        button_kodeinvo.configure(command=self.search_invo)
+
+        button_keluarinvo = Button(invo_window)
+        button_keluarinvo.place(relx=0.120, rely=0.486,width=76,height=23)
+        button_keluarinvo.configure(relief="flat")
+        button_keluarinvo.configure(overrelief="flat")
+        button_keluarinvo.configure(activebackground="#82736F")
+        button_keluarinvo.configure(cursor="hand2")
+        button_keluarinvo.configure(foreground="#ffffff")
+        button_keluarinvo.configure(font="Arial")
+        button_keluarinvo.configure(borderwidth="0")
+        button_keluarinvo.configure(text="Keluar")
+        button_keluarinvo.configure(command=self.keluar_invo)
+
+        button_hapusinvo = Button(invo_window)
+        button_hapusinvo.place(relx=0.112, rely=0.312,width=110,height=23)
+        button_hapusinvo.configure(relief="flat")
+        button_hapusinvo.configure(overrelief="flat")
+        button_hapusinvo.configure(activebackground="#82736F")
+        button_hapusinvo.configure(cursor="hand2")
+        button_hapusinvo.configure(foreground="#ffffff")
+        button_hapusinvo.configure(font="Arial")
+        button_hapusinvo.configure(borderwidth="0")
+        button_hapusinvo.configure(text="Hapus Invoice")
+        button_hapusinvo.configure(command=self.hapus_invo)
+
+        self.scrollbarx = Scrollbar(invo_window,orient=HORIZONTAL)
+        self.scrollbary = Scrollbar(invo_window,orient=VERTICAL)
+        self.tree = ttk.Treeview(invo_window)
+        self.tree.place(relx=0.307, rely=0.203, width=880, height=550)
+        self.tree.configure(
+            yscrollcommand=self.scrollbary.set, xscrollcommand=self.scrollbarx.set)
+        
+        self.tree.configure(selectmode="extended")
+
+        self.tree.bind("<<TreeviewSelect>>", self.on_tree_select)
+        self.tree.bind("<Double-1>", self.double_tap)
+
+        self.scrollbary.configure(command=self.tree.yview)
+        self.scrollbarx.configure(command=self.tree.xview)
+
+        self.scrollbary.place(relx=0.954, rely=0.203, width=22, height=548)
+        self.scrollbarx.place(relx=0.307, rely=0.924, width=884, height=22)
+
+        self.tree.configure(
+            columns=(
+                "Bill Number",
+                "Date",
+                "Customer Name",
+                "Customer Phone No.",
+            )
+        )
+
+        self.tree.heading("Bill Number", text="Bill Number", anchor=W)
+        self.tree.heading("Date", text="Date", anchor=W)
+        self.tree.heading("Customer Name", text="Customer Name", anchor=W)
+        self.tree.heading("Customer Phone No.", text="Customer Phone No.", anchor=W)
+        
+
+        self.tree.column("#0", stretch=NO, minwidth=0, width=0)
+        self.tree.column("#1", stretch=NO, minwidth=0, width=219)
+        self.tree.column("#2", stretch=NO, minwidth=0, width=219)
+        self.tree.column("#3", stretch=NO, minwidth=0, width=219)
+        self.tree.column("#4", stretch=NO, minwidth=0, width=219)
+        
+
+        self.DisplayData()
+
+    def search_invo(self):
+        pass
+    
+    def keluar_invo(self):
+        pass
+    
+    def hapus_invo(self):
+        pass
+
+    def double_tap(self):
+        pass
+
+    def DisplayData(self):
+        pass
+
+
+
+
+
 
 if __name__ == "__main__":
     root = Tk()
