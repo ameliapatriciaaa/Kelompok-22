@@ -453,12 +453,12 @@ class AdminPanel:
             inv.destroy()
 
     def billingsystem(self):
-        inv_window = Toplevel(self.root)
-        inv_window.geometry("1200x600")
-        inv_window.title("Billing System")
-        inv_window.resizable(0, 0)
+        bill_window = Toplevel(self.root)
+        bill_window.geometry("1200x600")
+        bill_window.title("Billing System")
+        bill_window.resizable(0, 0)
 
-        label_image = Label(inv_window)
+        label_image = Label(bill_window)
         label_image.place(relx=0, rely=0, width=1200, height=600)
 
         image_path = r".\Images\billingsystem.png"
@@ -466,51 +466,141 @@ class AdminPanel:
         label_image.config(image=img)
         label_image.image = img
 
-        self.entrynamacust = Entry(inv_window)
+        self.entrynamacust = Entry(bill_window)
         self.entrynamacust.place(relx=0.515, rely=0.155, width=200, height=25)
         self.entrynamacust.configure(font="-family {arial} -size 12")
         self.entrynamacust.configure(relief="flat")
 
-        self.entrynocust = Entry(inv_window)
+        self.entrynocust = Entry(bill_window)
         self.entrynocust.place(relx=0.775, rely=0.155, width=200, height=25)
         self.entrynocust.configure(font="-family {arial} -size 12")
         self.entrynocust.configure(relief="flat")
 
-        self.entrycustcarinota = Entry(inv_window)
+        self.entrycustcarinota = Entry(bill_window)
         self.entrycustcarinota.place(relx=0.110, rely=0.155, width=200, height=25)
         self.entrycustcarinota.configure(font="-family {arial} -size 12")
         self.entrycustcarinota.configure(relief="flat")
 
-        button_caritagihan = Button(inv_window, text="Cari", command=self.cari_tagihan, bg="#82736F", fg="white", font=("Arial", 12, "bold"))
+        button_caritagihan = Button(bill_window, text="Cari", command=self.cari_tagihan, bg="#82736F", fg="white", font=("Arial", 12, "bold"))
         button_caritagihan.place(relx=0.302, rely=0.145, width=93, height=35)
 
-        button_total = Button(inv_window, text="Total", command=self.total, bg="#82736F", fg="white", font=("Arial", 11, "bold"))
+        button_total = Button(bill_window, text="Total", command=self.total, bg="#82736F", fg="white", font=("Arial", 11, "bold"))
         button_total.place(relx=0.041, rely=0.881, width=101, height=27)
 
-        button_buat = Button(inv_window, text="Buat", command=self.buat, bg="#82736F", fg="white", font=("Arial", 11, "bold"))
+        button_buat = Button(bill_window, text="Buat", command=self.buat, bg="#82736F", fg="white", font=("Arial", 11, "bold"))
         button_buat.place(relx=0.041, rely=0.933, width=101, height=27)
 
-        button_print = Button(inv_window, text="Print", command=self.print, bg="#82736F", fg="white", font=("Arial", 11, "bold"))
+        button_print = Button(bill_window, text="Print", command=self.print, bg="#82736F", fg="white", font=("Arial", 11, "bold"))
         button_print.place(relx=0.169, rely=0.881, width=103, height=27)
 
-        button_email = Button(inv_window, text="Email", command=self.print, bg="#82736F", fg="white", font=("Arial", 11, "bold"))
+        button_email = Button(bill_window, text="Email", command=self.print, bg="#82736F", fg="white", font=("Arial", 11, "bold"))
         button_email.place(relx=0.169, rely=0.933, width=103, height=27)
 
-        button_clearbill = Button(inv_window, text="Clear", command=self.clear_bill, bg="#82736F", fg="white", font=("Arial", 11, "bold"))
+        button_clearbill = Button(bill_window, text="Clear", command=self.clear_bill, bg="#82736F", fg="white", font=("Arial", 11, "bold"))
         button_clearbill.place(relx=0.304, rely=0.881, width=103, height=27)
 
-        button_keluarbill = Button(inv_window, text="Keluar", command=self.keluar_bill, bg="#82736F", fg="white", font=("Arial", 11, "bold"))
+        button_keluarbill = Button(bill_window, text="Keluar", command=self.keluar_bill, bg="#82736F", fg="white", font=("Arial", 11, "bold"))
         button_keluarbill.place(relx=0.304, rely=0.933, width=103, height=27)
 
-        button_tambahkan = Button(inv_window, text="Tambahkan", command=self.tambahkan, bg="#82736F", fg="white", font=("Arial", 12, "bold"))
+        button_tambahkan = Button(bill_window, text="Tambahkan", command=self.tambahkan, bg="#82736F", fg="white", font=("Arial", 12, "bold"))
         button_tambahkan.place(relx=0.088, rely=0.720, width=94, height=35)
 
-        button_hapus = Button(inv_window, text="Hapus", command=self.hapus, bg="#82736F", fg="white", font=("Arial", 12, "bold"))
+        button_hapus = Button(bill_window, text="Hapus", command=self.hapus, bg="#82736F", fg="white", font=("Arial", 12, "bold"))
         button_hapus.place(relx=0.177, rely=0.720, width=94, height=35)
 
-        button_clearpilihan = Button(inv_window, text="Clear", command=self.clear_pilihan, bg="#82736F", fg="white", font=("Arial", 12, "bold"))
+        button_clearpilihan = Button(bill_window, text="Clear", command=self.clear_pilihan, bg="#82736F", fg="white", font=("Arial", 12, "bold"))
         button_clearpilihan.place(relx=0.266, rely=0.720, width=94, height=35)
-    
+
+        text_font = ("times new roman", "10")
+        self.combokat = ttk.Combobox(bill_window)
+        self.combokat.place(relx=0.130, rely=0.325, width=250, height=20)
+        self.combokat.configure(font=text_font)
+        self.combokat.configure(state="readonly")
+
+        cat = self.read_csv_categories()
+        self.combokat['values'] = cat
+        self.combokat.configure(state="readonly")
+        self.combokat.option_add("*TCombobox*Listbox.font", text_font)
+        self.combokat.option_add("*TCombobox*Listbox.selectBackground", "#82736F")
+
+
+        self.combosubkat = ttk.Combobox(bill_window)
+        self.combosubkat.place(relx=0.130, rely=0.410, width=250, height=20)
+        self.combosubkat.configure(font=text_font)
+        self.combosubkat.option_add("*TCombobox*Listbox.font", text_font) 
+        self.combosubkat.configure(state="disabled")
+
+        self.comboproduk = ttk.Combobox(bill_window)
+        self.comboproduk.place(relx=0.130, rely=0.485, width=250, height=20)
+        self.comboproduk.configure(font=text_font)
+        self.comboproduk.configure(state="disabled") 
+        self.comboproduk.option_add("*TCombobox*Listbox.font", text_font) 
+
+        self.entryjumlah = ttk.Entry(bill_window)
+        self.entryjumlah.place(relx=0.130, rely=0.572, width=250, height=20)
+        self.entryjumlah.configure(font=("times new roman", 10))
+        self.entryjumlah.configure(foreground="#82736F")
+        self.entryjumlah.configure(state="disabled")
+
+        self.Scrolledtext1 = scrolledtext.ScrolledText(bill_window)
+        self.Scrolledtext1.place(relx=0.420, rely=0.300, width=665, height=400)
+        self.Scrolledtext1.configure(borderwidth=0)
+        self.Scrolledtext1.configure(font=("times new roman", 10))
+        self.Scrolledtext1.configure(state="disabled")
+
+        self.combokat.bind("<<ComboboxSelected>>", self.update_subkategori)
+        self.combosubkat.bind("<<ComboboxSelected>>", self.update_produk)
+
+    def read_csv_categories(self):
+        categories = []
+        with open('inventory_data.csv', newline='', encoding='utf-8') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                category = row['product_cat']
+                if category not in categories:
+                    categories.append(category)
+        return categories
+
+    def update_subkategori(self, event=None):
+        selected_category = self.combokat.get()
+        subcategories = self.get_sub_kategori(selected_category)
+        self.combosubkat.configure(values=subcategories, state="readonly")
+        self.combosubkat.set('')
+        self.comboproduk.set('')
+        self.comboproduk.configure(state="disabled")
+
+    def get_sub_kategori(self, selected_category):
+        subcategories = []
+        with open('inventory_data.csv', newline='', encoding='utf-8') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                if row['product_cat'] == selected_category:
+                    subcategory = row['product_subcat']
+                    if subcategory not in subcategories:
+                        subcategories.append(subcategory)
+        return subcategories
+
+    def update_produk(self, event=None):
+        selected_category = self.combokat.get()
+        selected_subcategory = self.combosubkat.get()
+        products = self.get_produk(selected_category, selected_subcategory)
+        self.comboproduk.configure(values=products, state="readonly")
+        self.comboproduk.set('')
+        self.entryjumlah.configure(state="normal")
+
+    def get_produk(self, selected_category, selected_subcategory):
+        products = []
+        with open('inventory_data.csv', newline='', encoding='utf-8') as csvfile:
+            reader = csv.DictReader(csvfile)
+            if 'product_name' not in reader.fieldnames:
+                raise KeyError("Kolom 'product_name' tidak ditemukan dalam file CSV.")
+            for row in reader:
+                if row['product_cat'] == selected_category and row['product_subcat'] == selected_subcategory:
+                    product = row['product_name']
+                    if product not in products:
+                        products.append(product)
+        return products
+
     def cari_tagihan(self):
         pass
 
