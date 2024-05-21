@@ -648,10 +648,10 @@ class AdminPanel:
         self.kodeinvo.configure(relief="flat")
 
         button_kodeinvo = Button(invo_window)
-        button_kodeinvo.place(relx=0.132, rely=0.286,width=76,height=23)
+        button_kodeinvo.place(relx=0.265, rely=0.277,width=76,height=34)
         button_kodeinvo.configure(relief="flat")
         button_kodeinvo.configure(overrelief="flat")
-        button_kodeinvo.configure(activebackground="#82736F")
+        button_kodeinvo.configure(background="#82736F")
         button_kodeinvo.configure(cursor="hand2")
         button_kodeinvo.configure(foreground="#ffffff")
         button_kodeinvo.configure(font="Arial")
@@ -660,10 +660,10 @@ class AdminPanel:
         button_kodeinvo.configure(command=self.search_invo)
 
         button_keluarinvo = Button(invo_window)
-        button_keluarinvo.place(relx=0.120, rely=0.486,width=76,height=23)
+        button_keluarinvo.place(relx=0.183, rely=0.865,width=86,height=32)
         button_keluarinvo.configure(relief="flat")
         button_keluarinvo.configure(overrelief="flat")
-        button_keluarinvo.configure(activebackground="#82736F")
+        button_keluarinvo.configure(background="#82736F")
         button_keluarinvo.configure(cursor="hand2")
         button_keluarinvo.configure(foreground="#ffffff")
         button_keluarinvo.configure(font="Arial")
@@ -672,10 +672,10 @@ class AdminPanel:
         button_keluarinvo.configure(command=self.keluar_invo)
 
         button_hapusinvo = Button(invo_window)
-        button_hapusinvo.place(relx=0.112, rely=0.312,width=110,height=23)
+        button_hapusinvo.place(relx=0.112, rely=0.422,width=264,height=32)
         button_hapusinvo.configure(relief="flat")
         button_hapusinvo.configure(overrelief="flat")
-        button_hapusinvo.configure(activebackground="#82736F")
+        button_hapusinvo.configure(background="#82736F")
         button_hapusinvo.configure(cursor="hand2")
         button_hapusinvo.configure(foreground="#ffffff")
         button_hapusinvo.configure(font="Arial")
@@ -686,7 +686,7 @@ class AdminPanel:
         self.scrollbarx = Scrollbar(invo_window,orient=HORIZONTAL)
         self.scrollbary = Scrollbar(invo_window,orient=VERTICAL)
         self.tree = ttk.Treeview(invo_window)
-        self.tree.place(relx=0.307, rely=0.203, width=880, height=550)
+        self.tree.place(relx=0.340, rely=0.203, width=880, height=450)
         self.tree.configure(
             yscrollcommand=self.scrollbary.set, xscrollcommand=self.scrollbarx.set)
         
