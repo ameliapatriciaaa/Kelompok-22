@@ -105,11 +105,18 @@ class AdminPanel:
                 "Stock",
                 "MRP",
                 "Harga Pokok",
-                "No Vendor.",
+                "No Vendor."
             )
         )
 
-
+        self.tree.heading("Kode Produk", text="Kode Produk", anchor=W)
+        self.tree.heading("Nama", text="Nama", anchor=W)
+        self.tree.heading("Kategori", text="Kategori", anchor=W)
+        self.tree.heading("Sub-Kategori", text="Sub-Kategori", anchor=W)
+        self.tree.heading("Stock", text="Stock", anchor=W)
+        self.tree.heading("MRP", text="MRP", anchor=W)
+        self.tree.heading("Harga Pokok", text="Harga Pokok", anchor=W)
+        self.tree.heading("No Vendor.", text="No Vendor.", anchor=W)
 
         self.tree.column("#0", stretch=NO, minwidth=0, width=0)
         self.tree.column("#1", stretch=NO, minwidth=0, width=80)
@@ -125,11 +132,9 @@ class AdminPanel:
 
     def display_data(self):
         with open("inventory_data.csv", "r") as file:
-            # Baca setiap baris
+            next (file)
             for line in file:
-                # Pisahkan data menggunakan delimiter tertentu, misalnya koma untuk CSV
                 data = line.strip().split(",")
-                # Masukkan data ke dalam treeview
                 self.tree.insert("", "end", values=data)
     
     def cari(self):
