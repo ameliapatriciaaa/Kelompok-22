@@ -624,8 +624,8 @@ class AdminPanel:
                     break
             else:
                 self.qty_label.configure(text="In Stock: 0")
-        self.qty_label.configure(background="#white")
-        self.qty_label.configure(foreground="#white")
+        self.qty_label.configure(background="white")
+        self.qty_label.configure(foreground="black")
 
     def cari_tagihan(self):
         pass
@@ -646,7 +646,40 @@ class AdminPanel:
         pass
 
     def tambahkan(self):
-        pass
+        with open('inventory_data.csv', newline='', encoding='utf-8') as csvfile:
+            reader = csv.DictReader(csvfile)
+            inventory_data = list(reader)
+
+        self.Scrolledtext1.configure(state="normal")
+        strr = self.Scrolledtext1.get('1.0', 'end-1c')
+        if strr.find('Total') == -1:
+            product_name = self.comboproduk.get()
+            if product_name:
+                product_qty = self.entryjumlah.get()
+                stock, mrp = self.get_stock_mrp(inventory_data, product_name)
+                if stock is not None and mrp is not None:
+                    if product_qty.isdigit():
+                        if stock >= int(product_qty):
+                            sp = mrp * int(product_qty)
+                            bill_text = "{}\t\t\t\t\t\t{}\t\t\t\t\t   {}\n".format(product_name, product_qty, sp)
+                            self.Scrolledtext1.insert('insert', bill_text)
+                            self.Scrolledtext1.configure(state="disabled")
+                        else:
+                            messagebox.showerror("Oops!", "Stok tidak mencukupi. Periksa kuantitas.", parent=bill_window)
+                    else:
+                        messagebox.showerror("Oops!", "Kuantitas tidak valid.", parent=bill_window)
+                else:
+                    messagebox.showerror("Oops!", "Produk tidak ditemukan dalam inventaris.", parent=bill_window)
+            else:
+                messagebox.showerror("Oops!", "Pilih produk.", parent=bill_window)
+        else:
+            self.Scrolledtext1.delete('1.0', 'end')  # Hapus isi sebelum penambahan baru
+
+    def get_stock_mrp(self, inventory_data, product_name):
+        for row in inventory_data:
+            if row['product_name'] == product_name:
+                return int(row['stock']), float(row['mrp'])
+        return None, None  # Produk tidak ditemukan
 
     def hapus(self):
         pass
