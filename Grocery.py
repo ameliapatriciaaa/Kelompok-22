@@ -712,6 +712,31 @@ class AdminPanel:
                 parts = line.split()
                 total += float(parts[-1])
                 return total
+            
+    def random_bill_number(length):
+        return ''.join(random.choices('0123456789', k=length))
+    
+    def valid_phone(phone):
+        return phone.isdigit() and len(phone) == 10
+
+    def write_to_file(filename, content):
+        with open(filename, "a") as file:
+            file.write(content + "\n")
+
+    def update_inventory_file(filename, updates):
+        lines = []
+        with open(filename, "r") as file:
+            lines = file.readlines()
+
+        new_lines = []
+        for line in lines:
+            fields = line.strip().split(',')
+            if fields[0] in updates:
+                fields[1] = str(int(fields[1]) - updates[fields[0]])
+            new_lines.append(','.join(fields) + "\n")
+
+        with open(filename, "w") as file:
+            file.writelines(new_lines)
 
     def buat(self):
         pass
@@ -723,7 +748,12 @@ class AdminPanel:
         pass
 
     def keluar_bill(self):
-        pass
+        billeer = self.root
+        sure = messagebox.askyesno("Yakin mau keluar ?")
+        if sure == True:
+            billeer.destroy()
+            root.deiconify()
+            
 
     def cari_tagihan(self):
         pass
@@ -829,7 +859,12 @@ class AdminPanel:
         pass
     
     def keluar_invo(self):
-        pass
+        invoice = self.root
+        sure = messagebox.askyesno("Yakin mau keluar ?")
+        if sure == True:
+            invoice.destroy()
+            root.deiconify()
+            
     
     def hapus_invo(self):
         pass
