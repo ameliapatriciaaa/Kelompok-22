@@ -528,7 +528,6 @@ class AdminPanel:
         self.combokat.option_add("*TCombobox*Listbox.font", text_font)
         self.combokat.option_add("*TCombobox*Listbox.selectBackground", "#82736F")
 
-
         self.combosubkat = ttk.Combobox(bill_window)
         self.combosubkat.place(relx=0.130, rely=0.410, width=250, height=20)
         self.combosubkat.configure(font=text_font)
@@ -553,8 +552,14 @@ class AdminPanel:
         self.Scrolledtext1.configure(font=("times new roman", 10))
         self.Scrolledtext1.configure(state="disabled")
 
+        self.qty_label = Label(bill_window)
+        self.qty_label.place(relx=0.130, rely=0.620, width=70, height=20)
+        self.qty_label.configure(font=("times new roman", 8))
+        self.qty_label.configure(anchor="w")
+
         self.combokat.bind("<<ComboboxSelected>>", self.update_subkategori)
         self.combosubkat.bind("<<ComboboxSelected>>", self.update_produk)
+        self.comboproduk.bind("<<ComboboxSelected>>", self.show_qty)
 
     def read_csv_categories(self):
         categories = []
@@ -583,6 +588,7 @@ class AdminPanel:
                     subcategory = row['product_subcat']
                     if subcategory not in subcategories:
                         subcategories.append(subcategory)
+        self.combosubkat.bind("<<ComboboxSelected>>", self.update_produk)
         return subcategories
 
     def update_produk(self, event=None):
@@ -604,7 +610,22 @@ class AdminPanel:
                     product = row['product_name']
                     if product not in products:
                         products.append(product)
+        self.comboproduk.bind("<<ComboboxSelected>>", self.show_qty)
         return products
+
+    def show_qty(self, event=None):
+        self.entryjumlah.configure(state="normal")
+        product_name = self.comboproduk.get()
+        with open('inventory_data.csv', newline='', encoding='utf-8') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                if row['product_name'] == product_name:
+                    self.qty_label.configure(text="In Stock: {}".format(row['stock']))
+                    break
+            else:
+                self.qty_label.configure(text="In Stock: 0")
+        self.qty_label.configure(background="#white")
+        self.qty_label.configure(foreground="#white")
 
     def cari_tagihan(self):
         pass
