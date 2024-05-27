@@ -13,6 +13,7 @@ from tkinter import PhotoImage
 
 
 class AdminPanel:
+    
     def __init__(self, root):
         self.root = root
         self.root.geometry("1200x600")
@@ -627,24 +628,6 @@ class AdminPanel:
         self.qty_label.configure(background="white")
         self.qty_label.configure(foreground="black")
 
-    def cari_tagihan(self):
-        pass
-
-    def total(self):
-        pass
-
-    def buat(self):
-        pass
-
-    def print(self):
-        pass
-
-    def clear_bill(self):
-        pass
-
-    def keluar_bill(self):
-        pass
-
     def tambahkan(self):
         with open('inventory_data.csv', newline='', encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile)
@@ -665,13 +648,13 @@ class AdminPanel:
                             self.Scrolledtext1.insert('insert', bill_text)
                             self.Scrolledtext1.configure(state="disabled")
                         else:
-                            messagebox.showerror("Oops!", "Stok tidak mencukupi. Periksa kuantitas.", parent=bill_window)
+                            messagebox.showerror("Oops!", "Stok tidak mencukupi. Periksa kuantitas.")
                     else:
-                        messagebox.showerror("Oops!", "Kuantitas tidak valid.", parent=bill_window)
+                        messagebox.showerror("Oops!", "Kuantitas tidak valid.")
                 else:
-                    messagebox.showerror("Oops!", "Produk tidak ditemukan dalam inventaris.", parent=bill_window)
+                    messagebox.showerror("Oops!", "Produk tidak ditemukan dalam inventaris.")
             else:
-                messagebox.showerror("Oops!", "Pilih produk.", parent=bill_window)
+                messagebox.showerror("Oops!", "Pilih produk.")
         else:
             self.Scrolledtext1.delete('1.0', 'end')  # Hapus isi sebelum penambahan baru
 
@@ -701,6 +684,49 @@ class AdminPanel:
         self.comboproduk.set('')
         self.entryjumlah.delete(0, END)
         self.qty_label.configure(text="")
+
+    def total(self):
+        if self.isEmpty():
+            messagebox.showerror("Oops!", "Add a product.")
+        else:
+            self.Scrolledtext1.configure(state="normal")
+            strr = self.Scrolledtext1.get('1.0', 'end-1c')
+        if strr.find('Total') == -1:
+            divider = "\n\n\n" + ("─" * 65)
+            self.Scrolledtext1.insert('insert', divider)
+            total_amount = self.calculate_total()
+            total_text = "\nTotal\t\t\t\t\t\t\t\t\t\t\tRp. {}".format(total_amount)
+            self.Scrolledtext1.insert('insert', total_text)
+            divider2 = "\n" + ("─" * 65)
+            self.Scrolledtext1.insert('insert', divider2)
+            self.Scrolledtext1.configure(state="disabled")
+
+    def isEmpty(self):
+        return not self.Scrolledtext1.get('1.0', 'end-1c').strip()
+
+    def calculate_total(self):
+        lines = self.Scrolledtext1.get('1.0', 'end-1c').split('\n')
+        total = 0
+        for line in lines:
+            if line.strip():
+                parts = line.split()
+                total += float(parts[-1])
+                return total
+
+    def buat(self):
+        pass
+
+    def print(self):
+        pass
+
+    def clear_bill(self):
+        pass
+
+    def keluar_bill(self):
+        pass
+
+    def cari_tagihan(self):
+        pass
 
     def invoices(self):
         invo_window = Toplevel(self.root)
