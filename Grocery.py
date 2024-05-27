@@ -682,10 +682,25 @@ class AdminPanel:
         return None, None  # Produk tidak ditemukan
 
     def hapus(self):
-        pass
+        self.Scrolledtext1.configure(state="normal")
+        strr = self.Scrolledtext1.get('1.0', END)
+        if strr.find('Total') == -1:
+            lines = self.Scrolledtext1.get('1.0', 'end-1c').split('\n')
+            if lines:
+                lines.pop(-2)  # Remove the last product line
+                self.Scrolledtext1.delete('1.0', END)
+                self.Scrolledtext1.insert('insert', '\n'.join(lines) + '\n')
+        self.Scrolledtext1.configure(state="disabled")
 
     def clear_pilihan(self):
-        pass
+        self.entrynamacust.delete(0, END)
+        self.entrynocust.delete(0, END)
+        self.entrycustcarinota.delete(0, END)
+        self.combokat.set('')
+        self.combosubkat.set('')
+        self.comboproduk.set('')
+        self.entryjumlah.delete(0, END)
+        self.qty_label.configure(text="")
 
     def invoices(self):
         invo_window = Toplevel(self.root)
