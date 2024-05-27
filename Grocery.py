@@ -712,7 +712,7 @@ class AdminPanel:
         self.scrollbarx = Scrollbar(invo_window,orient=HORIZONTAL)
         self.scrollbary = Scrollbar(invo_window,orient=VERTICAL)
         self.tree = ttk.Treeview(invo_window)
-        self.tree.place(relx=0.340, rely=0.203, width=880, height=450)
+        self.tree.place(relx=0.345, rely=0.203, width=760, height=450)
         self.tree.configure(
             yscrollcommand=self.scrollbary.set, xscrollcommand=self.scrollbarx.set)
         
@@ -724,8 +724,8 @@ class AdminPanel:
         self.scrollbary.configure(command=self.tree.yview)
         self.scrollbarx.configure(command=self.tree.xview)
 
-        self.scrollbary.place(relx=0.954, rely=0.203, width=22, height=548)
-        self.scrollbarx.place(relx=0.307, rely=0.924, width=884, height=22)
+        self.scrollbary.place(relx=0.954, rely=0.205, width=10, height=300)
+        self.scrollbarx.place(relx=0.350, rely=0.920, width=200, height=22)
 
         self.tree.configure(
             columns=(
