@@ -1,6 +1,7 @@
 import csv
 import os
 import random
+import subprocess
 import tkinter as tk
 from datetime import datetime
 from tkinter import *
@@ -828,7 +829,16 @@ class AdminPanel:
             writer.writerows(lines)
 
     def print(self):
-        pass
+        cust_new_bill = self.entrycustcarinota.get()
+        filename = f'bill_{cust_new_bill}.txt'
+
+        # Melakukan pencetakan
+        try:
+            # Mencetak file menggunakan perintah print system
+            subprocess.run(["notepad.exe", "/p", filename], check=True)
+            messagebox.showinfo("Success", "Nota telah berhasil dicetak.")
+        except Exception as e:
+            messagebox.showerror("Error", f"Error: {str(e)}")
 
     def clear_bill(self):
         pass
