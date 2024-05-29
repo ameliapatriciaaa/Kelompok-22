@@ -796,6 +796,10 @@ class AdminPanel:
                         bill_file.write(f"{' '}Customer Name  : {cust_name}\n")
                         bill_file.write(f"{' '}Customer Number: {cust_num}\n\n")
                         bill_file.write(strr)
+                    
+                    with open('data.txt', 'a', encoding='utf-8') as data_file:
+                        data_file.write(f"{cust_new_bill},{datetime.now().strftime('%Y-%m-%d')},{cust_name},{cust_num}\n")
+
 
                     # Update jumlah inventaris di file CSV
                     inventory_updates = {}
@@ -844,14 +848,7 @@ class AdminPanel:
         pass
 
     def clear_bill(self):
-        self.Scrolledtext1.configure(state="normal")
-        self.Scrolledtext1.delete('1.0', END)
-        self.Scrolledtext1.configure(state="disabled")
-        self.entrynamacust.delete(0, END)
-        self.entrynocust.delete(0, END)
-        self.entrycustcarinota.configure(state="normal")
-        self.entrycustcarinota.delete(0, END)
-        self.entrycustcarinota.configure(state="disabled")
+        pass
 
     def keluar_bill(self):
         billeer = self.root
@@ -961,7 +958,20 @@ class AdminPanel:
         self.DisplayData()
 
     def search_invo(self):
-        pass
+        to_search = self.kodeinvo.get()
+        found = False
+
+        # Lakukan pencarian di treeview
+        for child in self.tree.get_children():
+            values = self.tree.item(child, "values")
+            if to_search in values:
+                self.tree.selection_set(child)
+                self.tree.focus(child)
+                found = True
+                break
+        
+        if not found:
+            messagebox.showerror("Oops!!", f"Bill Number: {to_search} not found.", parent=self.root)
     
     def keluar_invo(self):
         invoice = self.root
@@ -978,10 +988,10 @@ class AdminPanel:
         pass
 
     def DisplayData(self):
-        pass
-
-
-
+        with open("data.txt", "r") as file:
+            for line in file:
+                data = line.strip().split(',')
+                self.tree.insert("", tk.END, values=data)
 
 
 
