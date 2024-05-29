@@ -989,10 +989,51 @@ class AdminPanel:
             
     
     def hapus_invo(self):
+        to_delete = []
+        invoice = self.root
+
+        # Memeriksa apakah ada item yang dipilih di Treeview
+        if len(self.tree.selection()) != 0:
+            # Menampilkan dialog konfirmasi
+            sure = messagebox.askyesno("Confirm", "Are you sure you want to delete selected invoices?", parent=invoice)
+            if sure:
+                with open('data.txt', 'r') as file:
+                    lines = file.readlines()
+
+                # Mendapatkan indeks item yang dipilih
+                for item in self.tree.selection():
+                    index = self.tree.index(item)
+                    to_delete.append(index)
+
+                # Menghapus baris yang sesuai dengan indeks yang dipilih
+                new_lines = [line for index, line in enumerate(lines) if index not in to_delete]
+
+                # Menulis kembali data ke file
+                with open('data.txt', 'w') as file:
+                    file.writelines(new_lines)
+
+                # Menghapus file tagihan terkait
+                for item in self.tree.selection():
+                    bill_number = self.tree.item(item, 'values')[0]
+                    filename = f"bill_{bill_number}.txt"
+                    if os.path.exists(filename):
+                        os.remove(filename)
+
+                # Menampilkan pesan sukses
+                messagebox.showinfo("Success!!", "Invoices deleted from database.", parent=invoice)
+
+                # Menghapus item dari Treeview
+                for item in reversed(self.tree.selection()): # Hapus terbalik untuk menghindari masalah indeks
+                    self.tree.delete(item)
+
+                # Memperbarui tampilan data
+                self.DisplayData()
+        else:
+            messagebox.showerror("Error!!", "Please select an invoice.", parent=invoice)
+
+    def double_tap(self,event):
         pass
 
-    def double_tap(self):
-        pass
 
     def DisplayData(self):
         with open("data.txt", "r") as file:
@@ -1000,7 +1041,8 @@ class AdminPanel:
                 data = line.strip().split(',')
                 self.tree.insert("", tk.END, values=data)
 
-
+    def open_bill(self):
+        pass
 
 if __name__ == "__main__":
     root = Tk()
