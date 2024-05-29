@@ -844,7 +844,14 @@ class AdminPanel:
         pass
 
     def clear_bill(self):
-        pass
+        self.Scrolledtext1.configure(state="normal")
+        self.Scrolledtext1.delete('1.0', END)
+        self.Scrolledtext1.configure(state="disabled")
+        self.entrynamacust.delete(0, END)
+        self.entrynocust.delete(0, END)
+        self.entrycustcarinota.configure(state="normal")
+        self.entrycustcarinota.delete(0, END)
+        self.entrycustcarinota.configure(state="disabled")
 
     def keluar_bill(self):
         billeer = self.root
