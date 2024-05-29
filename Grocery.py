@@ -1,6 +1,8 @@
 import csv
 import os
+import random
 import tkinter as tk
+from datetime import datetime
 from tkinter import *
 from PIL import Image, ImageTk
 from tkinter import Toplevel
@@ -713,11 +715,13 @@ class AdminPanel:
                 total += float(parts[-1])
                 return total
             
-    def random_bill_number(length):
+    def random_bill_number(self, length):
         return ''.join(random.choices('0123456789', k=length))
     
-    def valid_phone(phone):
-        return phone.isdigit() and len(phone) == 10
+    def valid_phone(self, phone):
+        if phone.isdigit() and len(phone) in [10, 11, 12]:
+            return True
+        return False
 
     def write_to_file(filename, content):
         with open(filename, "a") as file:
@@ -738,8 +742,90 @@ class AdminPanel:
         with open(filename, "w") as file:
             file.writelines(new_lines)
 
+    state = 1
     def buat(self):
-        pass
+        global state
+        if self.state == 1:
+        # Mengambil teks dari scrolled text
+            strr = self.Scrolledtext1.get('1.0', 'end-1c')
+            cust_name = self.entrynamacust.get()
+            cust_num = self.entrynocust.get()
+
+            # Validasi input
+            if cust_name == "":
+                messagebox.showerror("Oops!", "Please enter a name.")
+            elif cust_num == "":
+                messagebox.showerror("Oops!", "Please enter a number.")
+            elif not self.valid_phone(cust_num):
+                messagebox.showerror("Oops!", "Please enter a valid number.")
+            elif self.isEmpty():
+                messagebox.showerror("Oops!", "Cart is empty.")
+            else:
+                # Menambahkan detail customer ke dalam ScrolledText
+                if 'Total' not in strr:
+                    self.total()
+                    self.buat()
+                else:
+                    self.Scrolledtext1.configure(state="normal")
+
+                    # Menghapus teks yang ada di ScrolledText
+                    self.Scrolledtext1.delete('1.0', END)
+
+                    # Menyisipkan baris-baris sesuai format yang diminta
+                    self.Scrolledtext1.insert(END, f"{' '*76}DUA PULUH DUAHH\n")
+                    self.Scrolledtext1.insert(END, f"{' '*80}{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+                    cust_new_bill = self.random_bill_number(8)
+                    self.Scrolledtext1.insert(END, f"{' '}Bill Number    : {cust_new_bill}\n")
+                    self.Scrolledtext1.insert(END, f"{' '}Customer Name  : {cust_name}\n")
+                    self.Scrolledtext1.insert(END, f"{' '}Customer Number: {cust_num}\n\n")
+                    self.Scrolledtext1.insert(END, strr)
+
+                    self.Scrolledtext1.configure(state="disabled")
+
+                    # Menampilkan nomor nota ke Entry dan menonaktifkannya
+                    self.entrycustcarinota.delete(0, END)
+                    self.entrycustcarinota.insert(END, cust_new_bill)
+                    self.entrycustcarinota.configure(state="disabled")
+
+                    # Menulis detail tagihan ke file baru
+                    with open(f'bill_{cust_new_bill}.txt', 'w', encoding='utf-8') as bill_file:
+                        bill_file.write(f"{' '}DUA PULUH DUAHH\n")
+                        bill_file.write(f"{' '}{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+                        bill_file.write(f"{' '}Bill Number    : {cust_new_bill}\n")
+                        bill_file.write(f"{' '}Customer Name  : {cust_name}\n")
+                        bill_file.write(f"{' '}Customer Number: {cust_num}\n\n")
+                        bill_file.write(strr)
+
+                    # Update jumlah inventaris di file CSV
+                    inventory_updates = {}
+                    lines = strr.split('\n')
+                    for line in lines:
+                        parts = line.split()
+                        if len(parts) > 2 and parts[-2].replace('.', '', 1).isdigit():  # Check for valid quantity
+                            product_name = ' '.join(parts[:-2])
+                            qty = int(float(parts[-2].replace('.', '', 1)))
+                            inventory_updates[product_name] = inventory_updates.get(product_name, 0) + qty
+
+                    self.update_inventory_file('inventory_data.csv', inventory_updates)
+
+                    messagebox.showinfo("Sukses!!", "Nota telah dibuat")
+
+                    self.entrynamacust.focus()
+
+    def update_inventory_file(self, filename, updates):
+        lines = []
+        with open(filename, 'r', newline='', encoding='utf-8') as file:
+            reader = csv.DictReader(file)
+            fieldnames = reader.fieldnames
+            for row in reader:
+                if row['product_name'] in updates:
+                    row['stock'] = str(int(row['stock']) - updates[row['product_name']])
+                lines.append(row)
+
+        with open(filename, 'w', newline='', encoding='utf-8') as file:
+            writer = csv.DictWriter(file, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(lines)
 
     def print(self):
         pass
@@ -754,7 +840,6 @@ class AdminPanel:
             billeer.destroy()
             root.deiconify()
             
-
     def cari_tagihan(self):
         pass
 
