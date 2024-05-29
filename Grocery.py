@@ -502,7 +502,7 @@ class AdminPanel:
         button_print = Button(bill_window, text="Print", command=self.print, bg="#82736F", fg="white", font=("Arial", 11, "bold"))
         button_print.place(relx=0.169, rely=0.881, width=103, height=27)
 
-        button_email = Button(bill_window, text="Email", command=self.print, bg="#82736F", fg="white", font=("Arial", 11, "bold"))
+        button_email = Button(bill_window, text="Email", command=self.email, bg="#82736F", fg="white", font=("Arial", 11, "bold"))
         button_email.place(relx=0.169, rely=0.933, width=103, height=27)
 
         button_clearbill = Button(bill_window, text="Clear", command=self.clear_bill, bg="#82736F", fg="white", font=("Arial", 11, "bold"))
@@ -840,24 +840,11 @@ class AdminPanel:
         except Exception as e:
             messagebox.showerror("Error", f"Error: {str(e)}")
 
+    def email (self):
+        pass
+
     def clear_bill(self):
-        self.Scrolledtext1.configure(state="normal")
-        self.Scrolledtext1.delete('1.0', END)
-        self.Scrolledtext1.configure(state="disabled")
-
-        # Menghapus isi entry nama customer
-        self.entrynamacust.delete(0, END)
-
-        # Menghapus isi entry nomor customer
-        self.entrynocust.delete(0, END)
-
-        # Menghapus isi entry cari nota customer
-        self.entrycustcarinota.configure(state="normal")
-        self.entrycustcarinota.delete(0, END)
-        self.entrycustcarinota.configure(state="disabled")
-
-
-
+        pass
 
     def keluar_bill(self):
         billeer = self.root
