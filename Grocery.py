@@ -717,8 +717,12 @@ class AdminPanel:
         for line in lines:
             if line.strip():
                 parts = line.split()
-                total += float(parts[-1])
-                return total
+                try:
+                    price = float(parts[-1])
+                    total += price
+                except ValueError:
+                    continue
+        return total
             
     def random_bill_number(self, length):
         return ''.join(random.choices('0123456789', k=length))
