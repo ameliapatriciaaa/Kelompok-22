@@ -1032,6 +1032,16 @@ class AdminPanel:
             messagebox.showerror("Error!!", "Please select an invoice.", parent=invoice)
 
     def double_tap(self,event):
+        item = self.tree.identify('item', event.x, event.y)
+        global bill_num
+        bill_num = self.tree.item(item)['values'][0]
+
+        global bill
+        bill = Toplevel()
+        pg = open_bill(bill)
+        bill.mainloop()
+    
+    def open_bill(self):
         pass
 
 
