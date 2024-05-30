@@ -864,7 +864,20 @@ class AdminPanel:
             root.deiconify()
             
     def cari_tagihan(self):
-        pass
+        bill_number = self.entrycustcarinota.get()
+        if bill_number:
+            file_path = f"bill_{bill_number}.txt"
+            if os.path.exists(file_path):
+                with open(file_path, "r", encoding="utf-8") as file:
+                    bill_content = file.read()
+                self.Scrolledtext1.configure(state="normal")
+                self.Scrolledtext1.delete("1.0", "end")
+                self.Scrolledtext1.insert("1.0", bill_content)
+                self.Scrolledtext1.configure(state="disabled")
+            else:
+                messagebox.showerror("Oops!", "Bill not found.")
+        else:
+            messagebox.showerror("Oops!", "Please enter a bill number.")
 
     def invoices(self):
         invo_window = Toplevel(self.root)
