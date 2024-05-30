@@ -9,3 +9,49 @@ product_id,product_name,product_cat,product_subcat,stock,mrp,cost_price,vendor_p
 87654,Bimoli,Sembako,Minyak Goreng,38,28000,25000,1556677889
 98765,Beng Beng,Makanan Ringan,Cokelat,66,2000,1500,1667788990
 99876,Redoxon,Vitamin,Tablet,36,70000,60000,1778899001
+11223,Sarimi,Mi Instan,Mi Rebus,120,3500,2800,1223456789
+33445,Enervon-C,Vitamin,Tablet,50,75000,65000,1335566778
+55667,ABC Kecap,Bumbu Dapur,Kecap,70,12000,10000,1446677889
+77889,Sprite,Minuman,Soda,65,6000,5000,1557788990
+99000,Taro,Makanan Ringan,Snek,80,2500,2000,1668899001
+11234,Lipton,Minuman,Teh Celup,90,7000,5500,1779900123
+12356,Betadine,Perawatan Diri,Antiseptik,40,18000,15000,1880011223
+13467,Pepsodent,Perawatan Diri,Pasta Gigi,55,15000,12000,1991122334
+14578,Beras Kita,Sembako,Beras,100,60000,55000,2112233445
+15689,Promag,Obat,Tablet,48,5000,4000,2223344556
+16790,Gulaku,Sembako,Gula,85,18000,15000,2334455667
+17891,Sedaap,Mi Instan,Mi Kuah,110,3000,2500,2445566778
+18912,Mizone,Minuman,Isotonik,75,5500,4500,2556677889
+20023,Kopiko,Makanan Ringan,Permen,95,2000,1500,2667788990
+21134,Coca Cola,Minuman,Soda,65,6000,5000,2778899001
+22345,Bear Brand,Minuman,Susu Steril,55,8500,7000,2889900123
+23456,Nutrisari,Minuman,Minuman Serbuk,60,3000,2500,2990011223
+24567,Caplang,Perawatan Diri,Minyak Kayu Putih,45,25000,20000,3101122334
+25678,Fanta,Minuman,Soda,80,6000,5000,3212233445
+26789,Kratingdaeng,Minuman,Minuman Energi,70,8000,6500,3323344556
+27890,Nu Green Tea,Minuman,Teh Botol,88,4500,3500,3434455667
+28901,Burjo,Bumbu Dapur,Bumbu Bubuk,95,4000,3000,3545566778
+30012,L-Men,Vitamin,Minuman Serbuk,50,70000,60000,3656677889
+31123,Ranch,Perawatan Diri,Sabun Cair,60,18000,15000,3767788990
+32234,Mayumi,Perawatan Diri,Lotion,40,25000,20000,3878899001
+33345,Panadol,Obat,Tablet,45,10000,8000,3989900123
+34456,Coolant,Minuman,Minuman Serbuk,75,3000,2500,4090011223
+35567,Bango,Bumbu Dapur,Kecap,85,12000,10000,4201122334
+36678,Segar Sari,Minuman,Minuman Ringan,60,3500,3000,4312233445
+37789,Fruity,Minuman,Jus Buah,50,7000,5500,4423344556
+38890,Chitato,Makanan Ringan,Keripik,95,8000,6500,4534455667
+39901,Sunsilk,Perawatan Diri,Sampo,70,15000,12000,4645566778
+40012,Milo,Minuman,Minuman Serbuk,88,10000,8500,4756677889
+41123,Sohato,Minuman,Minuman Isotonik,60,6000,5000,4867788990
+42234,PureIt,Perawatan Diri,Penyaring Air,45,35000,30000,4978899001
+43345,Fitbar,Makanan Ringan,Bar Sereal,85,10000,8000,4989900123
+44456,Yakult,Minuman,Probiotik,75,9000,7500,5090011223
+45567,Luwak White Koffie,Minuman,Kopi Instan,95,8000,6500,5201122334
+46678,Bolero,Makanan Ringan,Permen,80,5000,4000,5312233445
+47789,Kirin,Minuman,Bir,70,25000,20000,5423344556
+48890,Kitkat,Makanan Ringan,Cokelat,65,12000,10000,5534455667
+49901,Djarum,Perawatan Diri,Obat Nyamuk,55,15000,12000,5645566778
+50012,Ting Ting,Minuman,Soda,90,5000,4000,5756677889
+51123,Chocolatos,Makanan Ringan,Wafer,85,7000,5500,5867788990
+52234,Promina,Makanan Ringan,Bubur Bayi,80,10000,8000,5978899001
+53345,Sari Roti,Makanan Ringan,Roti,100,12000,10000,5989900123
