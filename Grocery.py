@@ -698,7 +698,7 @@ class AdminPanel:
             divider = "\n\n\n" + ("─" * 65)
             self.Scrolledtext1.insert('insert', divider)
             total_amount = self.calculate_total()
-            total_text = "\nTotal\t\t\t\t\t\t\t\t\t\t\tRp. {}".format(total_amount)
+            total_text = "\nTotal\t\t\t\t\t\t\t\t\t\tRp. {}".format(total_amount)
             self.Scrolledtext1.insert('insert', total_text)
             divider2 = "\n" + ("─" * 65)
             self.Scrolledtext1.insert('insert', divider2)
@@ -798,8 +798,7 @@ class AdminPanel:
                         bill_file.write(strr)
                     
                     with open('data.txt', 'a', encoding='utf-8') as data_file:
-                        data_file.write(f"{cust_new_bill},{datetime.now().strftime('%Y-%m-%d')},{cust_name},{cust_num}\n")
-
+                        data_file.write(f"{cust_new_bill},{datetime.now().strftime('%Y-%m-%d')},{cust_name},{cust_num}")
 
                     # Update jumlah inventaris di file CSV
                     inventory_updates = {}
@@ -1031,28 +1030,50 @@ class AdminPanel:
         else:
             messagebox.showerror("Error!!", "Please select an invoice.", parent=invoice)
 
-    def double_tap(self,event):
-        item = self.tree.identify('item', event.x, event.y)
-        global bill_num
-        bill_num = self.tree.item(item)['values'][0]
-
-        global bill
-        bill = Toplevel()
-        pg = open_bill(bill)
-        bill.mainloop()
-    
-    def open_bill(self):
-        pass
-
-
     def DisplayData(self):
         with open("data.txt", "r") as file:
             for line in file:
                 data = line.strip().split(',')
                 self.tree.insert("", tk.END, values=data)
 
+    def double_tap(self,event):
+        item = self.tree.identify('item', event.x, event.y)
+        global bill_num
+        bill_num = self.tree.item(item)['values'][0]
+
+        self.open_bill()
+    
     def open_bill(self):
-        pass
+        openbill_window = Toplevel(self.root)
+        openbill_window.geometry("1200x600")
+        openbill_window.title("Invoce")
+        openbill_window.resizable(0, 0)
+
+        label_image = Label(openbill_window)
+        label_image.place(relx=0, rely=0, width=1200, height=600)
+
+        image_path = r".\Images\Openbill.png"
+        img = PhotoImage(file=image_path)
+        label_image.config(image=img)
+        label_image.image = img
+
+        self.Scrolledtext1 = scrolledtext.ScrolledText(openbill_window)
+        self.Scrolledtext1.place(relx=0.050, rely=0.05, width=1100, height=500)
+        self.Scrolledtext1.configure(borderwidth=0)
+        self.Scrolledtext1.configure(font="-family {times new roman} -size 12")
+        self.Scrolledtext1.configure(state="disabled")
+
+        # Membaca file data.txt
+        try:
+            filename = f"bill_{bill_num}.txt"
+            with open(filename, 'r', encoding='utf-8') as file:
+                # Membaca seluruh isi file
+                content = file.read()
+                self.Scrolledtext1.configure(state="normal")
+                self.Scrolledtext1.insert(END, content)
+                self.Scrolledtext1.configure(state="disabled")
+        except FileNotFoundError:
+            messagebox.showerror("Error", f"Bill file '{filename}' not found.")
 
 if __name__ == "__main__":
     root = Tk()
