@@ -13,7 +13,11 @@ from tkinter import messagebox
 from tkinter import Label
 from tkinter import Button
 from tkinter import PhotoImage
-
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from email.mime.base import MIMEBase
+from email import encoders
 
 class AdminPanel:
     
@@ -842,9 +846,56 @@ class AdminPanel:
             messagebox.showinfo("Success", "Nota telah berhasil dicetak.")
         except Exception as e:
             messagebox.showerror("Error", f"Error: {str(e)}")
+ 
+    def send_email(self, recipient_email):
+        bill_num = self.entrycustcarinota.get()
+        filename = f'bill_{bill_num}.txt'
+        image_path = r".\Images\Openbill.png"
+
+        try:
+            with open(filename, 'r', encoding='utf-8') as file:
+                content = file.read()
+            
+            msg = MIMEMultipart()
+            msg['From'] = 'kelompok22tubesprokom@gmail.com'
+            msg['To'] = recipient_email
+            msg['Subject'] = 'Your Bill'
+            
+            body = MIMEText(content, 'plain')
+            msg.attach(body)
+            
+            with open(image_path, 'rb') as attachment:
+                part = MIMEBase('application', 'octet-stream')
+                part.set_payload(attachment.read())
+                encoders.encode_base64(part)
+                part.add_header(
+                    'Content-Disposition',
+                    f'attachment; filename= {image_path}',
+                )
+                msg.attach(part)
+            
+            server = smtplib.SMTP('smtp.gmail.com', 587)
+            server.starttls()
+            server.login('kelompok22tubesprokom@gmail.com', 'ykmb mrlg wybp edyy')
+            text = msg.as_string()
+            server.sendmail('kelompok22tubesprokom@gmail.com', recipient_email, text)
+            server.quit()
+            
+            messagebox.showinfo("Success", "Email has been sent successfully!")
+        except FileNotFoundError:
+            messagebox.showerror("Error", f"Bill file '{filename}' not found.")
+        except Exception as e:
+            messagebox.showerror("Error", f"Failed to send email: {str(e)}")
 
     def email (self):
-        pass
+        email_window = tk.Toplevel(self.root)
+        email_window.title("Send Email")
+        
+        tk.Label(email_window, text="Recipient Email").pack()
+        email_entry = tk.Entry(email_window)
+        email_entry.pack()
+        
+        tk.Button(email_window, text="Send", command=lambda: self.send_email(email_entry.get())).pack()
 
     def clear_bill(self):
         self.Scrolledtext1.configure(state="normal")

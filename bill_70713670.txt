@@ -1,13 +1,13 @@
  DUA PULUH DUAHH
- 2024-05-30 12:49:06
- Bill Number    : 90555223
- Customer Name  : Jiji
- Customer Number: 1234567890
+ 2024-05-30 14:55:24
+ Bill Number    : 70713670
+ Customer Name  : lala
+ Customer Number: 0000000000
 
-Bimoli						1					   28000.0
+Royco						12					   30000.0
 
 
 
 ─────────────────────────────────────────────────────────────────
-Total											Rp. 28000.0
+Total										Rp. 30000.0
 ─────────────────────────────────────────────────────────────────

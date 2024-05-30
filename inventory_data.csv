@@ -1,11 +1,11 @@
 product_id,product_name,product_cat,product_subcat,stock,mrp,cost_price,vendor_phn
 12345,Indomie,Mi Instan,Mi Goreng,98,3000,2500,1234567890
-12346,Tolak Angin,Obat,Herbal,66,8000,6000,0987654321
+12346,Tolak Angin,Obat,Herbal,53,8000,6000,0987654321
 76965,Aqua,Minuman,Air Mineral,92,5000,4000,0909090909
 43212,Teh Pucuk,Minuman,Teh Botol,78,4500,3500,1122334455
 54321,Lifebuoy,Perawatan Diri,Hand Sanitizer,49,20000,15000,1223344556
-65432,Royco,Bumbu Dapur,Kalimantan,102,2500,2000,1334455667
+65432,Royco,Bumbu Dapur,Kalimantan,87,2500,2000,1334455667
 76543,Ultra Milk,Minuman,Susu UHT,85,8000,6000,1445566778
-87654,Bimoli,Sembako,Minyak Goreng,40,28000,25000,1556677889
+87654,Bimoli,Sembako,Minyak Goreng,38,28000,25000,1556677889
 98765,Beng Beng,Makanan Ringan,Cokelat,66,2000,1500,1667788990
-99876,Redoxon,Vitamin,Tablet,38,70000,60000,1778899001
+99876,Redoxon,Vitamin,Tablet,36,70000,60000,1778899001
