@@ -1,7 +1,7 @@
 product_id,product_name,product_cat,product_subcat,stock,mrp,cost_price,vendor_phn
 12345,Indomie,Mi Instan,Mi Goreng,90,3000,2500,0987654321
-76965,Aqua,Minuman,Air Mineral,84,5000,4000,0909090909
-43212,Teh Pucuk,Minuman,Teh Botol,78,4500,3500,1122334455
+76965,Aqua,Minuman,Air Mineral,80,5000,4000,0909090909
+43212,Teh Pucuk,Minuman,Teh Botol,76,4500,3500,1122334455
 54321,Lifebuoy,Perawatan Diri,Hand Sanitizer,49,20000,15000,1223344556
 65432,Royco,Bumbu Dapur,Kalimantan,87,2500,2000,1334455667
 87654,Bimoli,Sembako,Minyak Goreng,38,28000,25000,1556677889
@@ -21,7 +21,7 @@ product_id,product_name,product_cat,product_subcat,stock,mrp,cost_price,vendor_p
 17891,Sedaap,Mi Instan,Mi Kuah,110,3000,2500,2445566778
 18912,Mizone,Minuman,Isotonik,75,5500,4500,2556677889
 20023,Kopiko,Makanan Ringan,Permen,95,2000,1500,2667788990
-21134,Coca Cola,Minuman,Soda,65,6000,5000,2778899001
+21134,Coca Cola,Minuman,Soda,60,6000,5000,2778899001
 22345,Bear Brand,Minuman,Susu Steril,55,8500,7000,2889900123
 23456,Nutrisari,Minuman,Minuman Serbuk,60,3000,2500,2990011223
 24567,Caplang,Perawatan Diri,Minyak Kayu Putih,45,25000,20000,3101122334
