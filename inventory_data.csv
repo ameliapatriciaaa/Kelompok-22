@@ -1,11 +1,9 @@
 product_id,product_name,product_cat,product_subcat,stock,mrp,cost_price,vendor_phn
-12345,Indomie,Mi Instan,Mi Goreng,98,3000,2500,1234567890
-12346,Tolak Angin,Obat,Herbal,53,8000,6000,0987654321
-76965,Aqua,Minuman,Air Mineral,92,5000,4000,0909090909
+12345,Indomie,Mi Instan,Mi Goreng,90,3000,2500,1234567890
+76965,Aqua,Minuman,Air Mineral,84,5000,4000,0909090909
 43212,Teh Pucuk,Minuman,Teh Botol,78,4500,3500,1122334455
 54321,Lifebuoy,Perawatan Diri,Hand Sanitizer,49,20000,15000,1223344556
 65432,Royco,Bumbu Dapur,Kalimantan,87,2500,2000,1334455667
-76543,Ultra Milk,Minuman,Susu UHT,85,8000,6000,1445566778
 87654,Bimoli,Sembako,Minyak Goreng,38,28000,25000,1556677889
 98765,Beng Beng,Makanan Ringan,Cokelat,66,2000,1500,1667788990
 99876,Redoxon,Vitamin,Tablet,36,70000,60000,1778899001
@@ -29,8 +27,8 @@ product_id,product_name,product_cat,product_subcat,stock,mrp,cost_price,vendor_p
 24567,Caplang,Perawatan Diri,Minyak Kayu Putih,45,25000,20000,3101122334
 25678,Fanta,Minuman,Soda,80,6000,5000,3212233445
 26789,Kratingdaeng,Minuman,Minuman Energi,70,8000,6500,3323344556
-27890,Nu Green Tea,Minuman,Teh Botol,88,4500,3500,3434455667
-28901,Burjo,Bumbu Dapur,Bumbu Bubuk,95,4000,3000,3545566778
+27890,Nu Green Tea,Minuman,Teh Botol,80,4500,3500,3434455667
+28901,Burjo,Bumbu Dapur,Bumbu Bubuk,100,4000,3000,0987654321
 30012,L-Men,Vitamin,Minuman Serbuk,50,70000,60000,3656677889
 31123,Ranch,Perawatan Diri,Sabun Cair,60,18000,15000,3767788990
 32234,Mayumi,Perawatan Diri,Lotion,40,25000,20000,3878899001
@@ -55,3 +53,4 @@ product_id,product_name,product_cat,product_subcat,stock,mrp,cost_price,vendor_p
 51123,Chocolatos,Makanan Ringan,Wafer,85,7000,5500,5867788990
 52234,Promina,Makanan Ringan,Bubur Bayi,80,10000,8000,5978899001
 53345,Sari Roti,Makanan Ringan,Roti,100,12000,10000,5989900123
+99999,Cimory,Minuman,Yogurt,90,10000.0,8000.0,0987656781

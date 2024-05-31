@@ -438,7 +438,7 @@ class AdminPanel:
 
                 to_delete_indexes = []
                 for i in self.sel:
-                    index = self.tree.index(i)
+                    index = self.tree.index(i)+1
                     to_delete_indexes.append(index)
 
                 # Hapus entri dari data berdasarkan indeks yang dipilih
@@ -806,7 +806,7 @@ class AdminPanel:
                         bill_file.write(strr)
                     
                     with open('data.txt', 'a', encoding='utf-8') as data_file:
-                        data_file.write(f"{cust_new_bill},{datetime.now().strftime('%Y-%m-%d')},{cust_name},{cust_num}")
+                        data_file.write(f"{cust_new_bill},{datetime.now().strftime('%Y-%m-%d')},{cust_name},{cust_num}\n")
 
                     # Update jumlah inventaris di file CSV
                     inventory_updates = {}
