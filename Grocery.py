@@ -52,6 +52,7 @@ class AdminPanel:
         self.button4.configure(relief="flat", overrelief="flat", activebackground="#ffffff", cursor="hand2")
         self.button4.configure(foreground="#333333", background="#ffffff", font="-family {Helvetica Bold} -size 16 -weight bold")
         self.button4.configure(borderwidth="0")
+        
 
     def open_inventory(self):
         inv_window = Toplevel(self.root)
@@ -90,7 +91,7 @@ class AdminPanel:
         self.scrollbarx = Scrollbar(inv_window, orient=HORIZONTAL)
         self.scrollbary = Scrollbar(inv_window, orient=VERTICAL)
         self.tree = ttk.Treeview(inv_window)
-        self.tree.place(relx=0.307, rely=0.203, width=880, height=550)
+        self.tree.place(relx=0.307, rely=0.135, width=778, height=490)
         self.tree.configure(
             yscrollcommand=self.scrollbary.set, xscrollcommand=self.scrollbarx.set
         )
@@ -101,8 +102,8 @@ class AdminPanel:
         self.scrollbary.configure(command=self.tree.yview)
         self.scrollbarx.configure(command=self.tree.xview)
 
-        self.scrollbary.place(relx=0.954, rely=0.203, width=22, height=548)
-        self.scrollbarx.place(relx=0.307, rely=0.924, width=884, height=22)
+        self.scrollbary.place(relx=0.960, rely=0.135, width=15, height=500)
+        self.scrollbarx.place(relx=0.307, rely=0.958, width=800, height=15)
 
         self.tree.configure(
             columns=(
@@ -397,6 +398,8 @@ class AdminPanel:
                                                     writer.writerows(data)
                                                 messagebox.showinfo("Success!!", "Produk berhasil diperbarui dalam inventaris.", parent=p_update)
                                                 p_update.destroy()
+                                                self.tree.delete(*self.tree.get_children())
+                                                self.display_data()
                                             else:
                                                 messagebox.showerror("Oops!", "Produk tidak ditemukan.", parent=p_update)
                                         else:
