@@ -676,19 +676,16 @@ class AdminPanel:
 
     def hapus(self):
         self.Scrolledtext1.configure(state="normal")
-        strr = self.Scrolledtext1.get('1.0', END)
-        if strr.find('Total') == -1:
-            lines = self.Scrolledtext1.get('1.0', 'end-1c').split('\n')
+        content = self.Scrolledtext1.get('1.0', END)
+        if 'Total' not in content:
+            lines = content.strip().split('\n')
             if lines:
-                lines.pop(-2)  # Remove the last product line
-                self.Scrolledtext1.delete('1.0', END)
-                self.Scrolledtext1.insert('insert', '\n'.join(lines) + '\n')
+                lines.pop(-1)
+            self.Scrolledtext1.delete('1.0', END)
+            self.Scrolledtext1.insert('1.0', '\n'.join(lines) + '\n')
         self.Scrolledtext1.configure(state="disabled")
 
     def clear_pilihan(self):
-        self.entrynamacust.delete(0, END)
-        self.entrynocust.delete(0, END)
-        self.entrycustcarinota.delete(0, END)
         self.combokat.set('')
         self.combosubkat.set('')
         self.comboproduk.set('')
@@ -908,11 +905,15 @@ class AdminPanel:
         self.Scrolledtext1.configure(state="normal")
         self.Scrolledtext1.delete('1.0', END)
         self.Scrolledtext1.configure(state="disabled")
+        self.entrycustcarinota.configure(state="normal")
         self.entrynamacust.delete(0, END)
         self.entrynocust.delete(0, END)
-        self.entrycustcarinota.configure(state="normal")
         self.entrycustcarinota.delete(0, END)
-        self.entrycustcarinota.configure(state="disabled")
+        self.combokat.set('')
+        self.combosubkat.set('')
+        self.comboproduk.set('')
+        self.entryjumlah.delete(0, END)
+        self.qty_label.configure(text="")
 
     def keluar_bill(self):
         billeer = self.root
